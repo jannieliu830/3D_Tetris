@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Group : MonoBehaviour {
@@ -161,6 +162,72 @@ public class Group : MonoBehaviour {
         {
             Debug.Log("Game Over!");
             Destroy(gameObject);
+        }
+    }
+
+    public Texture btnTexture;
+    void OnGUI()
+    {
+        if (!btnTexture)
+        {
+            Debug.LogError("Please assign a texture on the inspector");
+            return;
+        }
+        //Up
+        if (GUI.Button(new Rect(45, 10, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.position += new Vector3(0, 0, 1);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.position += new Vector3(0, 0, -1);
+        }
+        //Down
+        if (GUI.Button(new Rect(45, 50, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.position += new Vector3(0, 0, -1);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.position += new Vector3(0, 0, 1);
+        }
+        //Left
+        if (GUI.Button(new Rect(10, 30, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.position += new Vector3(-1, 0, 0);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.position += new Vector3(1, 0, 0);
+        }
+        //Right
+        if (GUI.Button(new Rect(80, 30, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.position += new Vector3(1, 0, 0);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.position += new Vector3(-1, 0, 0);
         }
     }
 }
