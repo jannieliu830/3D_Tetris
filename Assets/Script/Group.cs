@@ -173,8 +173,10 @@ public class Group : MonoBehaviour {
             Debug.LogError("Please assign a texture on the inspector");
             return;
         }
+
+        //Transform Part
         //Up
-        if (GUI.Button(new Rect(45, 10, 30, 30), btnTexture))
+        if (GUI.Button(new Rect(1245, 510, 30, 30), btnTexture))
         {
             //Modify position
             transform.position += new Vector3(0, 0, 1);
@@ -188,7 +190,7 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(0, 0, -1);
         }
         //Down
-        if (GUI.Button(new Rect(45, 50, 30, 30), btnTexture))
+        if (GUI.Button(new Rect(1245, 550, 30, 30), btnTexture))
         {
             //Modify position
             transform.position += new Vector3(0, 0, -1);
@@ -202,7 +204,7 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(0, 0, 1);
         }
         //Left
-        if (GUI.Button(new Rect(10, 30, 30, 30), btnTexture))
+        if (GUI.Button(new Rect(1210, 530, 30, 30), btnTexture))
         {
             //Modify position
             transform.position += new Vector3(-1, 0, 0);
@@ -216,7 +218,7 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(1, 0, 0);
         }
         //Right
-        if (GUI.Button(new Rect(80, 30, 30, 30), btnTexture))
+        if (GUI.Button(new Rect(1280, 530, 30, 30), btnTexture))
         {
             //Modify position
             transform.position += new Vector3(1, 0, 0);
@@ -229,5 +231,51 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(-1, 0, 0);
         }
+
+        //Now comes to the rotation part
+        //x-axis rotation
+        if (GUI.Button(new Rect(30, 530, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.Rotate(-90, 0, 0);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.Rotate(90, 0, 0); ;
+        }
+        //y-axis rotation
+        if (GUI.Button(new Rect(70, 530, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.Rotate(0, -90, 0);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.Rotate(0, 90, 0); ;
+        }
+        //z-axis rotation
+        if (GUI.Button(new Rect(110, 530, 30, 30), btnTexture))
+        {
+            //Modify position
+            transform.Rotate(0, 0, -90);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.Rotate(0, 0, 90); ;
+        }
+
+
     }
 }
