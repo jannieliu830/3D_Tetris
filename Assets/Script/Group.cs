@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Group : MonoBehaviour {
 
@@ -212,7 +213,7 @@ public class Group : MonoBehaviour {
 
         //Transform Part
         //Up 1245, 510, 30, 30
-        if (GUI.Button(new Rect(1405, 440, 100, 100), up))
+        if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.65f), 100, 100), up))
         {
             //Modify position
             transform.position += new Vector3(0, 0, 1);
@@ -226,7 +227,7 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(0, 0, -1);
         }
         //Down 1245, 550, 30, 30
-        if (GUI.Button(new Rect(1405, 550, 100, 100), down))
+        if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.85f), 100, 100), down)) 
         {
             //Modify position
             transform.position += new Vector3(0, 0, -1);
@@ -240,7 +241,7 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(0, 0, 1);
         }
         //Left 1210, 530, 30, 30
-        if (GUI.Button(new Rect(1300, 515, 100, 100), left))
+        if (GUI.Button(new Rect((Screen.width * 0.77f), (Screen.height * 0.75f), 100, 100), left))
         {
             //Modify position
             transform.position += new Vector3(-1, 0, 0);
@@ -254,7 +255,7 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(1, 0, 0);
         }
         //Right 1280, 530, 30, 30
-        if (GUI.Button(new Rect(1510, 515, 100, 100), right))
+        if (GUI.Button(new Rect((Screen.width * 0.93f), (Screen.height * 0.75f), 100, 100), right)) 
         {
             //Modify position
             transform.position += new Vector3(1, 0, 0);
@@ -270,7 +271,7 @@ public class Group : MonoBehaviour {
 
         //Now comes to the rotation part
         //x-axis rotation 30, 530, 30, 30
-        if (GUI.Button(new Rect(30, 530, 100, 100), xRot))
+        if (GUI.Button(new Rect((Screen.width * 0.02f), (Screen.height * 0.75f), 100, 100), xRot)) 
         {
             //Modify position
             transform.Rotate(-90, 0, 0);
@@ -284,7 +285,7 @@ public class Group : MonoBehaviour {
                 transform.Rotate(90, 0, 0); ;
         }
         //y-axis rotation 70, 530, 30, 30
-        if (GUI.Button(new Rect(140, 530, 100, 100), yRot))
+        if (GUI.Button(new Rect((Screen.width * 0.10f), (Screen.height * 0.75f), 100, 100), yRot)) 
         {
             //Modify position
             transform.Rotate(0, -90, 0);
@@ -298,7 +299,7 @@ public class Group : MonoBehaviour {
                 transform.Rotate(0, 90, 0); 
         }
         //z-axis rotation 110, 530, 30, 30
-        if (GUI.Button(new Rect(250, 530, 100, 100), zRot))
+        if (GUI.Button(new Rect((Screen.width * 0.18f), (Screen.height * 0.75f), 100, 100), zRot))
         {
             //Modify position
             transform.Rotate(0, 0, -90);
@@ -310,6 +311,11 @@ public class Group : MonoBehaviour {
             else
                 //If not valid, reverse the process.
                 transform.Rotate(0, 0, 90); ;
-        }     
+        }
+        if (GUI.Button(new Rect((Screen.width-100), (Screen.height * 0.02f), 50, 50), "Restart"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+          
     }
 }
