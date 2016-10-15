@@ -311,11 +311,6 @@ public class Group : MonoBehaviour {
             else
                 //If not valid, reverse the process.
                 transform.Rotate(0, 0, 90); ;
-        }
-        if (GUI.Button(new Rect((Screen.width-100), (Screen.height * 0.02f), 50, 50), "Restart"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-          
+        }          
     }
 }
