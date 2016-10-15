@@ -112,7 +112,8 @@ public class Group : MonoBehaviour {
                 transform.position += new Vector3(0, 0, 1);
         }
         //Rotate
-        else if (Input.GetKeyDown(KeyCode.Space))
+        //Z Axis
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             //Modify position
             transform.Rotate(0, 0, -90);
@@ -125,8 +126,36 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.Rotate(0, 0, 90); ;
         }
+        //X Axis
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            //Modify position
+            transform.Rotate(-90, 0, 0);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.Rotate(90, 0, 0); ;
+        }
+        //Y Axis
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            //Modify position
+            transform.Rotate(0, -90, 0);
+            //Check the validity
+            if (isValidGridPos())
+            {
+                updateGrid();
+            }
+            else
+                //If not valid, reverse the process.
+                transform.Rotate(0, 90, 0); ;
+        }
         //Fall && move downwards
-        else if (Input.GetKeyDown(KeyCode.Backspace) ||
+        else if (Input.GetKeyDown(KeyCode.Space) ||
             Time.time - lastFall >= 1) 
         {
             //Modify position
@@ -162,21 +191,28 @@ public class Group : MonoBehaviour {
         {
             Debug.Log("Game Over!");
             Destroy(gameObject);
-        }
+        }        
     }
 
-    public Texture btnTexture;
+    public Texture up;
+    public Texture down;
+    public Texture right;
+    public Texture left;
+    public Texture xRot;
+    public Texture yRot;
+    public Texture zRot;
+
     void OnGUI()
     {
-        if (!btnTexture)
+        if (!up || !down || !right || !left || !xRot || !yRot || !zRot)
         {
             Debug.LogError("Please assign a texture on the inspector");
             return;
         }
 
         //Transform Part
-        //Up
-        if (GUI.Button(new Rect(1245, 510, 30, 30), btnTexture))
+        //Up 1245, 510, 30, 30
+        if (GUI.Button(new Rect(1405, 440, 100, 100), up))
         {
             //Modify position
             transform.position += new Vector3(0, 0, 1);
@@ -189,8 +225,8 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(0, 0, -1);
         }
-        //Down
-        if (GUI.Button(new Rect(1245, 550, 30, 30), btnTexture))
+        //Down 1245, 550, 30, 30
+        if (GUI.Button(new Rect(1405, 550, 100, 100), down))
         {
             //Modify position
             transform.position += new Vector3(0, 0, -1);
@@ -203,8 +239,8 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(0, 0, 1);
         }
-        //Left
-        if (GUI.Button(new Rect(1210, 530, 30, 30), btnTexture))
+        //Left 1210, 530, 30, 30
+        if (GUI.Button(new Rect(1300, 515, 100, 100), left))
         {
             //Modify position
             transform.position += new Vector3(-1, 0, 0);
@@ -217,8 +253,8 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(1, 0, 0);
         }
-        //Right
-        if (GUI.Button(new Rect(1280, 530, 30, 30), btnTexture))
+        //Right 1280, 530, 30, 30
+        if (GUI.Button(new Rect(1510, 515, 100, 100), right))
         {
             //Modify position
             transform.position += new Vector3(1, 0, 0);
@@ -233,8 +269,8 @@ public class Group : MonoBehaviour {
         }
 
         //Now comes to the rotation part
-        //x-axis rotation
-        if (GUI.Button(new Rect(30, 530, 30, 30), btnTexture))
+        //x-axis rotation 30, 530, 30, 30
+        if (GUI.Button(new Rect(30, 530, 100, 100), xRot))
         {
             //Modify position
             transform.Rotate(-90, 0, 0);
@@ -247,8 +283,8 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.Rotate(90, 0, 0); ;
         }
-        //y-axis rotation
-        if (GUI.Button(new Rect(70, 530, 30, 30), btnTexture))
+        //y-axis rotation 70, 530, 30, 30
+        if (GUI.Button(new Rect(140, 530, 100, 100), yRot))
         {
             //Modify position
             transform.Rotate(0, -90, 0);
@@ -259,10 +295,10 @@ public class Group : MonoBehaviour {
             }
             else
                 //If not valid, reverse the process.
-                transform.Rotate(0, 90, 0); ;
+                transform.Rotate(0, 90, 0); 
         }
-        //z-axis rotation
-        if (GUI.Button(new Rect(110, 530, 30, 30), btnTexture))
+        //z-axis rotation 110, 530, 30, 30
+        if (GUI.Button(new Rect(250, 530, 100, 100), zRot))
         {
             //Modify position
             transform.Rotate(0, 0, -90);
@@ -274,8 +310,6 @@ public class Group : MonoBehaviour {
             else
                 //If not valid, reverse the process.
                 transform.Rotate(0, 0, 90); ;
-        }
-
-
+        }     
     }
 }
