@@ -2,11 +2,7 @@
 using System.Collections;
 
 public class ScreenResize : MonoBehaviour {
-    
-    void Start()
-    {
-        Resize();
-    }
+
     void Resize()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -17,12 +13,16 @@ public class ScreenResize : MonoBehaviour {
         float width = sr.sprite.bounds.size.x;
         float height = sr.sprite.bounds.size.y;
 
+
+        float worldScreenHeight = Camera.main.orthographicSize * 2f;
+        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+
         Vector3 xWidth = transform.localScale;
-        xWidth.x = - Screen.width / width;
+        xWidth.x = worldScreenWidth / width;
         transform.localScale = xWidth;
         //transform.localScale.x = worldScreenWidth / width;
         Vector3 yHeight = transform.localScale;
-        yHeight.y = - Screen.height / height;
+        yHeight.y = worldScreenHeight / height;
         transform.localScale = yHeight;
         //transform.localScale.y = worldScreenHeight / height;
 
