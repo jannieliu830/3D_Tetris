@@ -2,7 +2,11 @@
 using System.Collections;
 
 public class ScreenResize : MonoBehaviour {
-
+    
+    void Start()
+    {
+        Resize();
+    }
     void Resize()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
