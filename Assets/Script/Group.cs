@@ -57,8 +57,8 @@ public class Group : MonoBehaviour {
 
         //Accelerometer input
         Vector3 dir = Vector3.zero;
-        dir.y = -Input.acceleration.y;
-        dir.z = Input.acceleration.z;
+        dir.x = -Input.acceleration.x;
+        dir.z = Input.acceleration.y;
 
         //Move left
         //Need to be update!!!!!!!!!!!!!!!!!
@@ -216,7 +216,7 @@ public class Group : MonoBehaviour {
             }
         }
         //Accelerate drop with accelerometer
-        else if (dir.sqrMagnitude > 1)
+        else if (dir.sqrMagnitude* Time.deltaTime > 1)
         {
             // Modify position
             transform.position += new Vector3(0, -fallSpeed, 0);
