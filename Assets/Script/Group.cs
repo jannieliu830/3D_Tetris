@@ -7,6 +7,7 @@ public class Group : MonoBehaviour {
 
     // Time since last gravity tick
     float lastFall = 0;
+    int fallSpeed = 2; 
 
     //find each child block's position in the group
     //and find out whether the next moving position is aviliale.
@@ -53,6 +54,12 @@ public class Group : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        //Accelerometer input
+        Vector3 dir = Vector3.zero;
+        dir.y = -Input.acceleration.y;
+        dir.z = Input.acceleration.z;
+
         //Move left
         //Need to be update!!!!!!!!!!!!!!!!!
         //Need to be update!!!!!!!!!!!!!!!!!
@@ -156,8 +163,7 @@ public class Group : MonoBehaviour {
                 transform.Rotate(0, 90, 0); ;
         }
         //Fall && move downwards
-        else if (Input.GetKeyDown(KeyCode.Space) ||
-            Time.time - lastFall >= 1) 
+        else if (Time.time - lastFall >= 1) 
         {
             //Modify position
             transform.position += new Vector3(0, -1, 0);
@@ -181,6 +187,60 @@ public class Group : MonoBehaviour {
                 enabled = false;
             }
             lastFall = Time.time;
+        }
+        //Accelerate drop with keyboard
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Modify position
+            transform.position += new Vector3(0, -fallSpeed, 0);
+
+            // See if valid
+            if (isValidGridPos())
+            {
+                // It's valid. Update grid.
+                updateGrid();
+            }
+            else
+            {
+                // It's not valid. revert.
+                transform.position += new Vector3(0, fallSpeed, 0);
+
+                // Clear filled horizontal lines
+                Grid.deleteFullPlane();
+
+                // Spawn next Group
+                FindObjectOfType<Spawner>().NextSpawner();
+
+                // Disable script
+                enabled = false;
+            }
+        }
+        //Accelerate drop with accelerometer
+        else if (dir.sqrMagnitude > 1)
+        {
+            // Modify position
+            transform.position += new Vector3(0, -fallSpeed, 0);
+
+            // See if valid
+            if (isValidGridPos())
+            {
+                // It's valid. Update grid.
+                updateGrid();
+            }
+            else
+            {
+                // It's not valid. revert.
+                transform.position += new Vector3(0, fallSpeed, 0);
+
+                // Clear filled horizontal lines
+                Grid.deleteFullPlane();
+
+                // Spawn next Group
+                FindObjectOfType<Spawner>().NextSpawner();
+
+                // Disable script
+                enabled = false;
+            }
         }
     }
 
