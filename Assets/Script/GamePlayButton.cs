@@ -18,7 +18,7 @@ public class GamePlayButton : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.02f), 60, 60), pause))
+        if (GUI.Button(new Rect((Screen.width - 280), (Screen.height * 0.02f), 60, 60), pause))
         {
             isPaused = !isPaused;
             if (isPaused == true)
