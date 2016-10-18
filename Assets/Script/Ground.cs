@@ -20,8 +20,8 @@ public class Ground : MonoBehaviour {
         MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
         renderer.material.shader = shader;
 
-        renderer.material.SetFloat("_AmbientCoeff", 1.0f);
-        renderer.material.SetFloat("_DiffuseCoeff", 1.0f);
+        renderer.material.SetFloat("_AmbientCoeff", 2.0f);
+        renderer.material.SetFloat("_DiffuseCoeff", 2.0f);
         renderer.material.SetFloat("_SpecularCoeff", 0.15f);
         renderer.material.SetFloat("_SpecularPower", 15.0f);
     }

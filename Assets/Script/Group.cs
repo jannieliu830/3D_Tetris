@@ -223,7 +223,7 @@ public class Group : MonoBehaviour {
         //If default position is not valid, Game over.
         if (!isValidGridPos())
         {
-            Debug.Log("Game Over!");
+            SceneManager.LoadScene(2);
             Destroy(gameObject);
         }        
     }
