@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Group : MonoBehaviour {
 
+
     // Time since last gravity tick
     float lastFall = 0;
     int fallSpeed = 1; 
@@ -61,9 +62,6 @@ public class Group : MonoBehaviour {
         dir.z = Input.acceleration.z;
 
         //Move left
-        //Need to be update!!!!!!!!!!!!!!!!!
-        //Need to be update!!!!!!!!!!!!!!!!!
-        //Need to be update!!!!!!!!!!!!!!!!!
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             //Modify position
@@ -174,6 +172,9 @@ public class Group : MonoBehaviour {
             }
             else
             {
+                //Update gameScore.
+                Grid.gameScore += 50;
+
                 //If not valid, reverse the process.
                 transform.position += new Vector3(0, 1, 0);
 
@@ -202,6 +203,9 @@ public class Group : MonoBehaviour {
             }
             else
             {
+                //Update gameScore.
+                Grid.gameScore += 50;
+
                 // It's not valid. revert.
                 transform.position += new Vector3(0, fallSpeed, 0);
 
@@ -245,7 +249,7 @@ public class Group : MonoBehaviour {
         }
 
         //Transform Part
-        //Up 1245, 510, 30, 30
+        //Up
         if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.65f), 100, 100), up))
         {
             //Modify position
@@ -259,7 +263,7 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(0, 0, -1);
         }
-        //Down 1245, 550, 30, 30
+        //Down
         if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.85f), 100, 100), down)) 
         {
             //Modify position
@@ -273,7 +277,7 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(0, 0, 1);
         }
-        //Left 1210, 530, 30, 30
+        //Left
         if (GUI.Button(new Rect((Screen.width * 0.77f), (Screen.height * 0.75f), 100, 100), left))
         {
             //Modify position
@@ -287,7 +291,7 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.position += new Vector3(1, 0, 0);
         }
-        //Right 1280, 530, 30, 30
+        //Right
         if (GUI.Button(new Rect((Screen.width * 0.93f), (Screen.height * 0.75f), 100, 100), right)) 
         {
             //Modify position
@@ -303,7 +307,7 @@ public class Group : MonoBehaviour {
         }
 
         //Now comes to the rotation part
-        //x-axis rotation 30, 530, 30, 30
+        //x-axis rotation
         if (GUI.Button(new Rect((Screen.width * 0.02f), (Screen.height * 0.75f), 100, 100), xRot)) 
         {
             //Modify position
@@ -317,7 +321,7 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.Rotate(90, 0, 0); ;
         }
-        //y-axis rotation 70, 530, 30, 30
+        //y-axis rotation
         if (GUI.Button(new Rect((Screen.width * 0.10f), (Screen.height * 0.75f), 100, 100), yRot)) 
         {
             //Modify position
@@ -331,7 +335,7 @@ public class Group : MonoBehaviour {
                 //If not valid, reverse the process.
                 transform.Rotate(0, 90, 0); 
         }
-        //z-axis rotation 110, 530, 30, 30
+        //z-axis rotation
         if (GUI.Button(new Rect((Screen.width * 0.18f), (Screen.height * 0.75f), 100, 100), zRot))
         {
             //Modify position
@@ -344,6 +348,6 @@ public class Group : MonoBehaviour {
             else
                 //If not valid, reverse the process.
                 transform.Rotate(0, 0, 90); ;
-        }          
+        }
     }
 }

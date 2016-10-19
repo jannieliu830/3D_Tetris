@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Grid : MonoBehaviour {
 
+    //Store game score
+    public static double gameScore = 0;
+    //initialize the width, length and height of the game area
     public static int w = 10;
     public static int l = 10;
     public static int h = 25;
@@ -88,8 +91,9 @@ public class Grid : MonoBehaviour {
         {
             if (isPlaneFull(y))
             {
+                gameScore += 5000;
                 deletePlane(y);
-                decreasePlaneAbove(y+1);
+                decreasePlaneAbove(y + 1);
                 --y;
             }
         }

@@ -29,16 +29,20 @@ Shader "Unlit/PhongShader"
 {
 	SubShader
 	{
+		Tags{ "Queue" = "Geometry" "RenderType" = "Opaque" }
 		Pass
 		{
+			Tags{ "LightMode" = "ForwardBase" }
 			CGPROGRAM
 			#pragma target 3.0
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma multi_compile_fwdbase 
 
 			#define MAX_LIGHTS 10
 
 			#include "UnityCG.cginc"
+			#include "AutoLight.cginc"
 
 			uniform float _AmbientCoeff;
 			uniform float _DiffuseCoeff;
@@ -62,6 +66,7 @@ Shader "Unlit/PhongShader"
 				float4 color : COLOR;
 				float4 worldVertex : TEXCOORD0;
 				float3 worldNormal : TEXCOORD1;
+				LIGHTING_COORDS(3, 4)
 			};
 
 			// Implementation of the vertex shader
@@ -85,12 +90,19 @@ Shader "Unlit/PhongShader"
 				o.worldVertex = worldVertex;
 				o.worldNormal = worldNormal;
 
+				TRANSFER_VERTEX_TO_FRAGMENT(o);
+
 				return o;
 			}
+
+			sampler2D _MainTex;
+			fixed4 _Color;
 
 			// Implementation of the fragment shader
 			fixed4 frag(vertOut v) : SV_Target
 			{
+				fixed atten = LIGHT_ATTENUATION(v);
+
 				// Our interpolated normal might not be of length 1
 				float3 interpNormal = normalize(v.worldNormal);
 
@@ -126,9 +138,15 @@ Shader "Unlit/PhongShader"
 				returnColor.rgb = amb.rgb + dif_and_spe_sum.rgb;
 				returnColor.a = v.color.a;
 
-				return returnColor;
+				fixed4 c;
+				c.rgb = (UNITY_LIGHTMODEL_AMBIENT.rgb * 2 * returnColor.rgb);   // Ambient term. Only do this in Forward Base. It only needs calculating once.
+				c.rgb += returnColor.rgb * (atten * 2); // Diffuse and specular.
+				c.a = returnColor.a * atten;
+
+				return c;
 			}
 			ENDCG
 		}
 	}
+	FallBack "VertexLit"    // Use VertexLit's shadow caster/receiver passes.
 }
