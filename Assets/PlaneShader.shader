@@ -126,13 +126,13 @@
 
 		Pass
 			{
-				Tags{ "LightMode" = "ForwardAdd" }                       // Again, this pass tag is important otherwise Unity may not give the correct light information.
-				Blend One One                                           // Additively blend this pass with the previous one(s). This pass gets run once per pixel light.
+				Tags{ "LightMode" = "ForwardAdd" }              // Again, this pass tag is important otherwise Unity may not give the correct light information.
+				Blend One One                                   // Additively blend this pass with the previous one(s). This pass gets run once per pixel light.
 				CGPROGRAM
 				#pragma target 3.0
 				#pragma vertex vert
 				#pragma fragment frag
-				#pragma multi_compile_fwdadd_fullshadows               // This line tells Unity to compile this pass for forward add, giving attenuation information for the light with full shadow information.
+				#pragma multi_compile_fwdadd_fullshadows        // This line tells Unity to compile this pass for forward add, giving attenuation information for the light with full shadow information.
 
 				#include "UnityCG.cginc"
 				#include "AutoLight.cginc"
@@ -143,9 +143,8 @@
 				uniform float _SpecularCoeff;
 				uniform float _SpecularPower;
 
-				uniform int _NumPointLights;
-				uniform float3 _PointLightColors;
-				uniform float3 _PointLightPositions;
+				uniform float3 _PointLightColor;
+				uniform float3 _PointLightPosition;
 
 				struct v2f
 				{
@@ -198,15 +197,13 @@
 					float Ka = _AmbientCoeff; // (May seem inefficient, but compiler will optimise)
 					float3 amb = surfaceColor * UNITY_LIGHTMODEL_AMBIENT.rgb * Ka;
 
-					// Sum up lighting calculations for each light (only diffuse/specular; ambient does not depend on the individual lights)
-					float3 dif_and_spe_sum = float3(0.0, 0.0, 0.0);
 					// Calculate diffuse RBG reflections, we save the results of L.N because we will use it again
 					// (when calculating the reflected ray in our specular component)
 					float fAtt = 1;
 					float Kd = _DiffuseCoeff;
-					float3 L = normalize(_PointLightPositions - i.worldVertex.xyz);
+					float3 L = normalize(_PointLightPosition - i.worldVertex.xyz);
 					float LdotN = dot(L, bumpNormal);
-					float3 dif = fAtt * _PointLightColors.rgb * Kd * surfaceColor * saturate(LdotN);
+					float3 dif = fAtt * _PointLightColor.rgb * Kd * surfaceColor * saturate(LdotN);
 
 					// Calculate specular reflections
 					float Ks = _SpecularCoeff;
@@ -214,13 +211,11 @@
 					float3 V = normalize(_WorldSpaceCameraPos - i.worldVertex.xyz);
 					// Using Blinn-Phong approximation (note, this is a modification of normal Phong illumination):
 					float3 H = normalize(V + L);
-					float3 spe = fAtt * _PointLightColors.rgb * Ks * pow(saturate(dot(bumpNormal, H)), specN);
-
-					dif_and_spe_sum += dif + spe;
+					float3 spe = fAtt * _PointLightColor.rgb * Ks * pow(saturate(dot(bumpNormal, H)), specN);
 
 					// Combine Phong illumination model components
 					float4 returnColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
-					returnColor.rgb = amb.rgb + dif_and_spe_sum.rgb;
+					returnColor.rgb = amb.rgb + dif.rgb + spe.rgb;
 					returnColor.a = surfaceColor.a;
 
 					fixed4 c;
