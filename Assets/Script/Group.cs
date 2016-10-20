@@ -224,9 +224,12 @@ public class Group : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Time.timeScale = 20;
         //If default position is not valid, Game over.
         if (!isValidGridPos())
         {
+            Grid.lastGameScore = Grid.gameScore;
+            Grid.gameScore = 0;
             SceneManager.LoadScene(2);
             Destroy(gameObject);
         }        

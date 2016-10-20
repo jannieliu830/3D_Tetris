@@ -15,9 +15,7 @@ public class MenuScript : MonoBehaviour {
     public Toggle MenuMute;
     public Toggle GameMute;
 
-    public AudioSource menu_music;
-    //public static AudioSource game_music;
-    
+    public AudioSource menu_music;    
     
 	// Use this for initialization
 	void Start () {
@@ -34,11 +32,11 @@ public class MenuScript : MonoBehaviour {
         QuitMenu.enabled = false;
         GuideMenu.enabled = false;
         SettingMenu.enabled = false;
-      //  MenuMute.isOn = true;
-      //  GameMute.isOn = true;
-       // game_music.volume = 0;
-        
-	}
+
+        //initialize the BGM
+        menu_music.mute = !MenuMute.isOn;
+
+    }
 	
     public void ExitPressed()
     {

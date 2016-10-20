@@ -17,5 +17,6 @@ public class GameOver : MonoBehaviour {
         {
             SceneManager.LoadScene(1);
         }
+        GUI.Box(new Rect(100, (Screen.height * 0.02f), 100, 100), "Total Score: \n" + Grid.lastGameScore.ToString(), skin.box);
     }
 }

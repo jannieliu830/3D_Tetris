@@ -5,10 +5,11 @@ public class Grid : MonoBehaviour {
 
     //Store game score
     public static double gameScore = 0;
+    public static double lastGameScore = 0;
     //initialize the width, length and height of the game area
     public static int w = 10;
     public static int l = 10;
-    public static int h = 25;
+    public static int h = 30;
     public static Transform[,,] grid = new Transform[w,h,l];
 
     //Help to round a vector
@@ -22,7 +23,7 @@ public class Grid : MonoBehaviour {
     public static bool insideBorder(Vector3 pos)
     {
         return ((int)pos.x >= 0 && (int)pos.x < w
-            && (int)pos.z >= 0 && (int)pos.z < l && (int)pos.y >= 0);
+            && (int)pos.z >= 0 && (int)pos.z < l && (int)pos.y >= 0 && (int)pos.y < (h - 2));
     }
 
     //deletePlane is the function of deleting a complete plane, when player managed to fill every
