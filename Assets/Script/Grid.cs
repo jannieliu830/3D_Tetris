@@ -6,6 +6,7 @@ public class Grid : MonoBehaviour {
     //Store game score
     public static double gameScore = 0;
     public static double lastGameScore = 0;
+
     //initialize the width, length and height of the game area
     public static int w = 10;
     public static int l = 10;

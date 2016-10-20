@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Group : MonoBehaviour {
 
-
+    public static int gameDifficulty = 1;
     // Time since last gravity tick
     float lastFall = 0;
     int fallSpeed = 1; 
@@ -224,7 +224,7 @@ public class Group : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Time.timeScale = 20;
+        Time.timeScale = gameDifficulty;
         //If default position is not valid, Game over.
         if (!isValidGridPos())
         {

@@ -14,6 +14,7 @@ public class MenuScript : MonoBehaviour {
     public Button SettingButton;
     public Toggle MenuMute;
     public Toggle GameMute;
+    public Slider Difficulty;
 
     public AudioSource menu_music;    
     
@@ -33,6 +34,7 @@ public class MenuScript : MonoBehaviour {
         GuideMenu.enabled = false;
         SettingMenu.enabled = false;
 
+        Difficulty.value = Group.gameDifficulty;
         //initialize the BGM
         menu_music.mute = !MenuMute.isOn;
 
@@ -143,4 +145,8 @@ public class MenuScript : MonoBehaviour {
 
     }
 
+    public void ChangeDifficulty()
+    {
+        Group.gameDifficulty = (int)Difficulty.value;
+    }
 }
