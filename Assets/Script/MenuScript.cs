@@ -37,7 +37,18 @@ public class MenuScript : MonoBehaviour {
         Difficulty.value = Group.gameDifficulty;
         //initialize the BGM
         menu_music.mute = !MenuMute.isOn;
+    }
 
+    void Update()
+    {
+        if (GamePlayButton.musicMute)
+        {
+            GameMute.isOn = false;
+        }
+        else
+        {
+            GameMute.isOn = true;
+        }
     }
 	
     public void ExitPressed()
@@ -135,7 +146,6 @@ public class MenuScript : MonoBehaviour {
         if(GameMute.isOn == true)
         {
             GamePlayButton.musicMute = false;
-
         }
         else
         {

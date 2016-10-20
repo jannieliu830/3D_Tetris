@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +7,7 @@ public class GamePlayButton : MonoBehaviour
 {
     public GUISkin skin;
 
-    public bool isPaused;
+    public static bool isPaused;
     public bool isGameOver;
     private Animator anim;
     public Texture pause;
@@ -16,11 +17,13 @@ public class GamePlayButton : MonoBehaviour
     public AudioSource bg_music;
     public static bool musicMute;
     private Texture musicButton;
+    public Camera mainCamera;
 
     void Start()
     {
         //initialize BGM and pauseScene
         bg_music.mute = musicMute;
+
         if (musicMute)
         {
             musicButton = mute;
@@ -78,7 +81,12 @@ public class GamePlayButton : MonoBehaviour
             {
                 musicButton = play;
             }
-
+        }
+        //Back to origin
+        if (GUI.Button(new Rect((Screen.width * 0.02f), (Screen.height * 0.90f), 100, 30),"O"))
+        {
+            mainCamera.transform.position = CameraControl.originPosition;
+            mainCamera.transform.rotation = CameraControl.originQuaternion;
         }
 
         //Game Score display

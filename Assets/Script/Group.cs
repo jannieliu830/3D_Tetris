@@ -64,6 +64,7 @@ public class Group : MonoBehaviour {
         //Move left
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(-1, 0, 0);
             //Check the validity
@@ -78,6 +79,7 @@ public class Group : MonoBehaviour {
         //Move right
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(1, 0, 0);
             //Check the validity
@@ -92,6 +94,7 @@ public class Group : MonoBehaviour {
         //Move forward
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(0, 0, 1);
             //Check the validity
@@ -106,6 +109,7 @@ public class Group : MonoBehaviour {
         //Move backward
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(0, 0, -1);
             //Check the validity
@@ -121,6 +125,7 @@ public class Group : MonoBehaviour {
         //Z Axis
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.Rotate(0, 0, -90);
             //Check the validity
@@ -135,6 +140,7 @@ public class Group : MonoBehaviour {
         //X Axis
         else if (Input.GetKeyDown(KeyCode.A))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.Rotate(-90, 0, 0);
             //Check the validity
@@ -149,6 +155,7 @@ public class Group : MonoBehaviour {
         //Y Axis
         else if (Input.GetKeyDown(KeyCode.S))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.Rotate(0, -90, 0);
             //Check the validity
@@ -163,6 +170,7 @@ public class Group : MonoBehaviour {
         //Fall && move downwards
         else if (Input.GetKeyDown(KeyCode.Space) || Time.time - lastFall >= 1)
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(0, -1, 0);
             //Check the validity
@@ -192,6 +200,7 @@ public class Group : MonoBehaviour {
         //Accelerate drop with accelerometer
         else if (dir.sqrMagnitude > 2) 
         {
+            if (GamePlayButton.isPaused == true) return;
             // Modify position
             transform.position += new Vector3(0, -fallSpeed, 0);
 
@@ -255,6 +264,7 @@ public class Group : MonoBehaviour {
         //Up
         if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.65f), 100, 100), up))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(0, 0, 1);
             //Check the validity
@@ -269,6 +279,7 @@ public class Group : MonoBehaviour {
         //Down
         if (GUI.Button(new Rect((Screen.width * 0.85f), (Screen.height * 0.85f), 100, 100), down)) 
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(0, 0, -1);
             //Check the validity
@@ -283,6 +294,7 @@ public class Group : MonoBehaviour {
         //Left
         if (GUI.Button(new Rect((Screen.width * 0.77f), (Screen.height * 0.75f), 100, 100), left))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(-1, 0, 0);
             //Check the validity
@@ -297,6 +309,7 @@ public class Group : MonoBehaviour {
         //Right
         if (GUI.Button(new Rect((Screen.width * 0.93f), (Screen.height * 0.75f), 100, 100), right)) 
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.position += new Vector3(1, 0, 0);
             //Check the validity
@@ -313,6 +326,7 @@ public class Group : MonoBehaviour {
         //x-axis rotation
         if (GUI.Button(new Rect((Screen.width * 0.02f), (Screen.height * 0.75f), 100, 100), xRot)) 
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.Rotate(-90, 0, 0);
             //Check the validity
@@ -327,6 +341,7 @@ public class Group : MonoBehaviour {
         //y-axis rotation
         if (GUI.Button(new Rect((Screen.width * 0.10f), (Screen.height * 0.75f), 100, 100), yRot)) 
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.Rotate(0, -90, 0);
             //Check the validity
@@ -341,6 +356,7 @@ public class Group : MonoBehaviour {
         //z-axis rotation
         if (GUI.Button(new Rect((Screen.width * 0.18f), (Screen.height * 0.75f), 100, 100), zRot))
         {
+            if (GamePlayButton.isPaused == true) return;
             //Modify position
             transform.Rotate(0, 0, -90);
             //Check the validity

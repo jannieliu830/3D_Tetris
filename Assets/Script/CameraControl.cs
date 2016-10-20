@@ -5,8 +5,14 @@ public class CameraControl : MonoBehaviour {
 
     public float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
     public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
+    public static Vector3 originPosition;
+    public static Quaternion originQuaternion;
 
-
+    void Start()
+    {
+        originPosition = transform.position;
+        originQuaternion = transform.rotation;       
+    }
     void Update()
     {
         // If there are two touches on the device...
