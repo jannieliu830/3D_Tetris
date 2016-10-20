@@ -22,11 +22,11 @@ public class FingerSwipe : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-            foreach (Touch touch in Input.touches)
+        foreach (Touch touch in Input.touches)
+        {
+            if (Input.touchCount == 1)
             {
-                if (Input.touchCount == 1)
-                {
-                    if (touch.phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Began)
                 {
                     initTouch = touch;
                 }
